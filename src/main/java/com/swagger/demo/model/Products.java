@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel
 public class Products {
 
-	@ApiModelProperty(example = "[{\"id\": 1, \"name\": \"product name\", \"description\": \"product description\" }, {\"id\": 1, \"name\": \"product name\", \"description\": \"product description\" }]", required = true)
+	@ApiModelProperty(example = "[{\"id\": 1, \"name\": \"product name\", \"description\": \"product description\" }, {\"id\": 2, \"name\": \"product name\", \"description\": \"product description\" }]", required = true)
 	private List<Product> products;
 
 	public Products() {

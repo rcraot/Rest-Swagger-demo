@@ -19,8 +19,13 @@ public class SwaggerConfiguration {
 
 	@Bean
 	public Docket api() {
-		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.swagger.demo")).paths(PathSelectors.any()).build().apiInfo(apiInfo());
+		return new Docket(DocumentationType.SWAGGER_2)
+					.groupName("products")
+					.apiInfo(apiInfo())
+					.select()
+					.apis(RequestHandlerSelectors.basePackage("com.swagger.demo.controller"))
+					.paths(PathSelectors.regex("/api/products.*"))
+					.build();
 	}
 	
 	private ApiInfo apiInfo() {
