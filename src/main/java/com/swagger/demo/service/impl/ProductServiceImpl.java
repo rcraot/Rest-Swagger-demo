@@ -16,26 +16,26 @@ import com.swagger.demo.service.ProductService;
 public class ProductServiceImpl implements ProductService {
 	
 	@Autowired
-	private ProductRepository productRepository;
+	private ProductRepository repository;
 
 	@Override
 	public Product save(Product product) {
-		return productRepository.save(product);
+		return repository.save(product);
 	}
 
 	@Override
 	public void deleteById(Long id) {
-		productRepository.deleteById(id);
+		repository.deleteById(id);
 	}
 
 	@Override
 	public Optional<Product> findById(Long id) {
-		return productRepository.findById(id);
+		return repository.findById(id);
 	}
 
 	@Override
 	public List<Product> findAll() {
-		return productRepository.findAll();
+		return repository.findAll();
 	}
 
 }

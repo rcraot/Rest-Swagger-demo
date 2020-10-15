@@ -24,13 +24,13 @@ public class ProductController implements ProductApi {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
 	@Autowired
-	private ProductService productService;
+	private ProductService service;
 
 	@Override
 	@GetMapping()
 	public Products getProductList() {
 		Products products = new Products();
-		products.setProducts(productService.findAll());
+		products.setProducts(service.findAll());
 		return products;
 	}
 
@@ -38,24 +38,24 @@ public class ProductController implements ProductApi {
 	@GetMapping("/{productId}")
 	public Product getProduct(@PathVariable(value = "productId") Long productId) {
 		LOGGER.info(" productId : " + productId);
-		return productService.findById(productId)
+		return service.findById(productId)
 				.orElseThrow(() -> new ProductNotFoundException("Product not found for the Id : ", productId));
 	}
 
 	@Override
 	@PostMapping()
 	public String createProduct(@RequestBody Product product) {
-		productService.save(product);
+		service.save(product);
 		return "Product added";
 	}
 
 	@Override
 	@PutMapping("/{productId}")
 	public String updateProduct(@PathVariable(value = "productId") Long productId, @RequestBody Product product) {
-		return productService.findById(productId).map(p -> {
+		return service.findById(productId).map(p -> {
 			p.setName(product.getName());
 			p.setDescription(product.getDescription());
-			productService.save(p);
+			service.save(p);
 			return "Product updated";
 		}).orElseThrow(() -> new ProductNotFoundException("Product not found for the Id : ", productId));
 	}
@@ -63,8 +63,8 @@ public class ProductController implements ProductApi {
 	@Override
 	@DeleteMapping("/{productId}")
 	public String deleteProduct(@PathVariable(value = "productId") Long productId) {
-		return productService.findById(productId).map(p -> {
-			productService.deleteById(productId);
+		return service.findById(productId).map(p -> {
+			service.deleteById(productId);
 			return "Product deleted";
 		}).orElseThrow(() -> new ProductNotFoundException("Product not found for the Id : ", productId));
 	}
