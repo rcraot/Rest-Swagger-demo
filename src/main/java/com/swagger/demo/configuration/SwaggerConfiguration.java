@@ -24,8 +24,7 @@ public class SwaggerConfiguration {
 					.apiInfo(apiInfo())
 					.select()
 					.apis(RequestHandlerSelectors.basePackage("com.swagger.demo.controller"))
-					.paths(PathSelectors.regex("/product.*"))
-					///api/products
+					.paths(PathSelectors.regex("/api/products.*"))
 					.build();
 	}
 	
